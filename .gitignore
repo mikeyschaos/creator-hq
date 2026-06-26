@@ -1,16 +1,13 @@
+# Python
+venv/
 __pycache__/
 *.pyc
 
+# Environment variables
 .env
-venv/
 
-logs/*.log
+# Logs
+logs/
 
-data/*.json
-
-.history
-
+# macOS
 .DS_Store
-
-.idea/
-.vscode/
