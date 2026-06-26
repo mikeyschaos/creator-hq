@@ -1,0 +1,20 @@
+{
+  "I'd Dig It": {
+    "image": "iddigitlogo.png",
+    "goal": 1000,
+    "color": "#2E86DE",
+    "youtube": "https://www.youtube.com/@iddigit"
+  },
+  "Guns & Game": {
+    "image": "gunsandgame.jpg",
+    "goal": 1000,
+    "color": "#C0392B",
+    "youtube": "https://www.youtube.com/@gunsandgame"
+  },
+  "Mikey's Chaos": {
+    "image": "mikeyschaos.jpg",
+    "goal": 1000,
+    "color": "#27AE60",
+    "youtube": "https://www.youtube.com/@mikeyschaos"
+  }
+}
