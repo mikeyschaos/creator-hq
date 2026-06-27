@@ -17,7 +17,10 @@ control = Blueprint("control", __name__)
 
 @control.route("/control")
 def index():
-    return render_template("control/index.html")
+    return render_template(
+        "control/index.html",
+        active_page="overview",
+    )
 
 
 @control.route("/control/goals", methods=["GET", "POST"])
@@ -63,4 +66,33 @@ def goals():
         "control/goals.html",
         settings=settings,
         saved=saved,
+        active_page="goals",
+    )
+
+
+@control.route("/control/tips", methods=["GET", "POST"])
+def tips():
+
+    if request.method == "POST":
+
+        tips = request.form.getlist("tip")
+
+        SettingsService.save_tips(tips)
+
+        return redirect(
+            url_for(
+                "control.tips",
+                saved="true"
+            )
+        )
+
+    tips = SettingsService.get_tips()
+
+    saved = request.args.get("saved") == "true"
+
+    return render_template(
+        "control/tips.html",
+        tips=tips,
+        saved=saved,
+        active_page="tips",
     )

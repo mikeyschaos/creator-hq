@@ -1,0 +1,73 @@
+{% extends "control/layout.html" %}
+
+{% block title %}
+Creator Tips
+{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">
+💡 Creator Tips
+</h2>
+
+<p class="page-description">
+Manage the motivational tips displayed on your Creator HQ dashboard.
+</p>
+
+{% if saved %}
+
+<div style="
+background:#1f4d2e;
+color:#d4ffd9;
+padding:14px;
+border-radius:8px;
+margin-bottom:25px;
+">
+
+✅ Creator Tips saved successfully.
+
+</div>
+
+{% endif %}
+
+<form method="POST">
+
+<div class="goal-grid">
+
+{% for tip in tips %}
+
+<div class="goal-card">
+
+<div class="goal-label">
+Creator Tip
+</div>
+
+<input
+    class="goal-input"
+    type="text"
+    name="tip"
+    value="{{ tip }}"
+    required>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="save-row">
+
+<button
+    class="save-button"
+    type="submit"
+    style="opacity:1;cursor:pointer;">
+
+💾 Save Changes
+
+</button>
+
+</div>
+
+</form>
+
+{% endblock %}

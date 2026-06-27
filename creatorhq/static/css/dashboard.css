@@ -19,9 +19,6 @@ h1{
 ========================== */
 
 .coach-card{
-    display:flex;
-    align-items:center;
-    gap:18px;
 
     background:#1b1b1b;
 
@@ -31,20 +28,66 @@ h1{
 
     padding:18px 22px;
 
-    margin-bottom:24px;
+    margin-bottom:20px;
+
 }
 
 .coach-title{
-    font-size:22px;
+
+    font-size:24px;
+
     font-weight:bold;
-    min-width:220px;
+
+    margin-bottom:16px;
+
+}
+
+.coach-grid{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:30px;
+
+    align-items:start;
+
 }
 
 .coach-message{
+
     color:#ddd;
+
     font-size:16px;
+
     line-height:1.5;
+
     white-space:pre-line;
+
+}
+
+.creator-tip{
+
+    color:#8fd3ff;
+
+    font-size:18px;
+
+    font-style:italic;
+
+    line-height:1.5;
+
+}
+
+.section-title{
+
+    color:#888;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+
 }
 
 /* ==========================
@@ -187,18 +230,6 @@ h1{
 
 }
 
-.section-title{
-
-    color:#888;
-
-    font-size:11px;
-
-    text-transform:uppercase;
-
-    margin-bottom:6px;
-
-}
-
 .health{
 
     font-size:18px;
@@ -261,7 +292,7 @@ h1{
 
 .network{
 
-    margin-top:22px;
+    margin-top:20px;
 
     background:#1b1b1b;
 

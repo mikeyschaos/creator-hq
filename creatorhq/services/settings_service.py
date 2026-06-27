@@ -17,6 +17,12 @@ class SettingsService:
 
     CONFIG_FILE = os.path.join(PROJECT_ROOT, "config.json")
 
+    TIPS_FILE = os.path.join(
+        PROJECT_ROOT,
+        "tips",
+        "creator_tips.txt",
+    )
+
     DASHBOARD_ENGINE = os.path.join(
         PROJECT_ROOT,
         "scripts",
@@ -35,7 +41,6 @@ class SettingsService:
 
     @classmethod
     def get_goals(cls):
-
         config = cls.load()
 
         return {
@@ -45,30 +50,51 @@ class SettingsService:
 
     @classmethod
     def save_goals(cls, goals, network_goal):
-
         config = cls.load()
 
         config["goals"] = goals
         config["networkGoal"] = int(network_goal)
 
         cls.save(config)
+        cls.regenerate_dashboard()
+
+    @classmethod
+    def get_tips(cls):
+        """
+        Return all creator tips.
+        """
+
+        if not os.path.exists(cls.TIPS_FILE):
+            return []
+
+        with open(cls.TIPS_FILE, "r") as f:
+            return [
+                line.strip()
+                for line in f
+                if line.strip()
+            ]
+
+    @classmethod
+    def save_tips(cls, tips):
+        """
+        Save creator tips.
+        """
+
+        with open(cls.TIPS_FILE, "w") as f:
+            for tip in tips:
+                tip = tip.strip()
+                if tip:
+                    f.write(tip + "\n")
 
         cls.regenerate_dashboard()
 
     @classmethod
     def regenerate_dashboard(cls):
-        """
-        Rebuild dashboard_data.json after configuration changes.
-        """
-
         try:
-
             subprocess.run(
                 ["python", cls.DASHBOARD_ENGINE],
                 cwd=cls.PROJECT_ROOT,
                 check=True,
             )
-
         except Exception as e:
-
             print(f"Dashboard regeneration failed: {e}")
