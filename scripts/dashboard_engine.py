@@ -1,22 +1,41 @@
 import json
-import random
 import os
+import random
+import sys
 from datetime import datetime
+
+# --------------------------------------------------
+# Allow imports from the Creator HQ project
+# --------------------------------------------------
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from creatorhq.utils.date_utils import (
+    days_since,
+    upload_status,
+    format_elapsed,
+)
+
+from creatorhq.services.coach import build_coach_message
 
 # --------------------------------------------------
 # Project Paths
 # --------------------------------------------------
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
-YOUTUBE_DATA_FILE = os.path.join(BASE_DIR, "data", "youtube_data.json")
-OUTPUT_FILE = os.path.join(BASE_DIR, "data", "dashboard_data.json")
-TIP_FILE = os.path.join(BASE_DIR, "tips", "creator_tips.txt")
-CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
+YOUTUBE_DATA_FILE = os.path.join(DATA_DIR, "youtube_data.json")
+OUTPUT_FILE = os.path.join(DATA_DIR, "dashboard_data.json")
+
+TIP_FILE = os.path.join(PROJECT_ROOT, "tips", "creator_tips.txt")
+CONFIG_FILE = os.path.join(PROJECT_ROOT, "config.json")
 
 
 # --------------------------------------------------
-# Data Loaders
+# Loaders
 # --------------------------------------------------
 
 def load_youtube_data():
@@ -33,14 +52,12 @@ def load_tip():
     with open(TIP_FILE, "r") as f:
         tips = [line.strip() for line in f if line.strip()]
 
-    day = datetime.now().timetuple().tm_yday
-    random.seed(day)
-
+    random.seed(datetime.now().timetuple().tm_yday)
     return random.choice(tips)
 
 
 # --------------------------------------------------
-# Goal Calculation
+# Goal Logic
 # --------------------------------------------------
 
 def next_goal(channel_name, subscribers, goals):
@@ -74,7 +91,7 @@ def next_goal(channel_name, subscribers, goals):
 
 def build_dashboard():
 
-    stats = load_youtube_data()
+    youtube = load_youtube_data()
     config = load_config()
 
     goals = config.get("goals", {})
@@ -87,48 +104,79 @@ def build_dashboard():
         "settings": config.get("dashboard", {}),
     }
 
-    total_subs = 0
+    total_subscribers = 0
     total_views = 0
     total_videos = 0
 
-    for channel_name, channel in stats.items():
+    for channel_name, channel in youtube.items():
 
-        subs = int(channel["subscribers"])
-        views = int(channel["views"])
-        videos = int(channel["videos"])
+        subscribers = int(channel.get("subscribers", 0))
+        views = int(channel.get("views", 0))
+        videos = int(channel.get("videos", 0))
 
-        goal = next_goal(channel_name, subs, goals)
+        latest_video = channel.get("latestVideo", {})
+
+        published = latest_video.get("publishedAt")
+
+        if published:
+            days = days_since(published)
+            color, message = upload_status(days)
+            display = format_elapsed(days)
+        else:
+            days = None
+            color = "gray"
+            message = "No uploads found"
+            display = "Never"
+
+        goal = next_goal(channel_name, subscribers, goals)
 
         dashboard["channels"].append(
             {
                 "name": channel_name,
-                "subscribers": subs,
+                "subscribers": subscribers,
                 "views": views,
                 "videos": videos,
                 "goal": goal,
-                "remaining": goal - subs,
-                "progress": round((subs / goal) * 100, 1),
+                "remaining": goal - subscribers,
+                "progress": round((subscribers / goal) * 100, 1),
+
+                "latestVideo": latest_video,
+
+                "uploadHealth": {
+                    "daysSince": days,
+                    "display": display,
+                    "color": color,
+                    "message": message,
+                },
             }
         )
 
-        total_subs += subs
+        total_subscribers += subscribers
         total_views += views
         total_videos += videos
+
+    # -----------------------------
+    # Coach's Corner
+    # -----------------------------
+
+    dashboard["coach"] = build_coach_message(
+        dashboard["channels"]
+    )
 
     network_goal = config.get("networkGoal", 1000)
 
     dashboard["network"] = {
-        "subscribers": total_subs,
+        "subscribers": total_subscribers,
         "views": total_views,
         "videos": total_videos,
         "goal": network_goal,
-        "progress": round((total_subs / network_goal) * 100, 1),
+        "progress": round((total_subscribers / network_goal) * 100, 1),
     }
 
     with open(OUTPUT_FILE, "w") as f:
         json.dump(dashboard, f, indent=2)
 
-    print("Dashboard data generated successfully.")
+    print("✓ Dashboard data generated successfully.")
 
 
 if __name__ == "__main__":

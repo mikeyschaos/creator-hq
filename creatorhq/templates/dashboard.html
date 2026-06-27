@@ -5,95 +5,7 @@
 
 <title>Creator HQ</title>
 
-<style>
-
-body{
-
-    background:#111;
-
-    color:white;
-
-    font-family:Arial,Helvetica,sans-serif;
-
-    margin:40px;
-
-}
-
-h1{
-
-    margin-bottom:0;
-
-}
-
-.subtitle{
-
-    color:#888;
-
-    margin-bottom:40px;
-
-}
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:20px;
-
-}
-
-.card{
-
-    background:#1b1b1b;
-
-    border-radius:15px;
-
-    padding:20px;
-
-}
-
-.card img{
-
-    width:80px;
-
-    height:80px;
-
-    object-fit:cover;
-
-    border-radius:12px;
-
-    margin-bottom:15px;
-
-}
-
-.stat{
-
-    margin:8px 0;
-
-}
-
-.network{
-
-    margin-top:40px;
-
-    padding:20px;
-
-    background:#1b1b1b;
-
-    border-radius:15px;
-
-}
-
-.footer{
-
-    margin-top:30px;
-
-    color:#777;
-
-}
-
-</style>
+<link rel="stylesheet" href="/static/css/dashboard.css">
 
 </head>
 
@@ -102,8 +14,21 @@ h1{
 <h1>Creator HQ</h1>
 
 <div class="subtitle">
-
 Stay Consistent.
+</div>
+
+<div class="coach-card">
+
+<div class="coach-title">
+{{ dashboard.coach.icon }}
+{{ dashboard.coach.title }}
+</div>
+
+<div class="coach-message">
+
+{{ dashboard.coach.message }}
+
+</div>
 
 </div>
 
@@ -113,23 +38,117 @@ Stay Consistent.
 
 <div class="card">
 
+{% if channel.image %}
 <img src="/static/images/{{ channel.image }}">
+{% endif %}
 
-<h2>{{ channel.name }}</h2>
+<h2 class="channel-title">
+{{ channel.name }}
+</h2>
 
-<div class="stat">
-Subscribers:
-<strong>{{ "{:,}".format(channel.subscribers) }}</strong>
+<div class="big-number">
+{{ "{:,}".format(channel.subscribers) }}
 </div>
 
-<div class="stat">
-Views:
-<strong>{{ "{:,}".format(channel.views) }}</strong>
+<div class="small-label">
+Subscribers
 </div>
 
-<div class="stat">
-Videos:
-<strong>{{ channel.videos }}</strong>
+<div class="goal-line">
+
+Goal:
+<strong>{{ channel.goal }}</strong>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:{{ channel.progress }}%;">
+
+</div>
+
+</div>
+
+<div class="progress-text">
+
+{{ channel.progress }}%
+•
+{{ channel.remaining }} remaining
+
+</div>
+
+<div class="stats-grid">
+
+<div>
+
+<div class="stat-value">
+{{ "{:,}".format(channel.views) }}
+</div>
+
+<div class="stat-label">
+Views
+</div>
+
+</div>
+
+<div>
+
+<div class="stat-value">
+{{ channel.videos }}
+</div>
+
+<div class="stat-label">
+Videos
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+
+Upload Health
+
+</div>
+
+<div class="health {{ channel.uploadHealth.color }}">
+
+{{ channel.uploadHealth.display }}
+
+</div>
+
+<div class="message">
+
+{{ channel.uploadHealth.message }}
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+
+Latest Upload
+
+</div>
+
+<div class="video-title">
+
+<a
+target="_blank"
+href="https://youtube.com/watch?v={{ channel.latestVideo.videoId }}">
+
+{{ channel.latestVideo.title }}
+
+</a>
+
+</div>
+
 </div>
 
 </div>
@@ -142,28 +161,64 @@ Videos:
 
 <h2>Creator Network</h2>
 
-<p>
+<div class="network-grid">
 
-Subscribers:
-<strong>{{ "{:,}".format(dashboard.network.subscribers) }}</strong>
+<div>
+
+<div class="network-number">
+
+{{ "{:,}".format(dashboard.network.subscribers) }}
+
+</div>
+
+<div class="network-label">
+
+Subscribers
+
+</div>
+
+</div>
+
+<div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:{{ dashboard.network.progress }}%;">
+
+</div>
+
+</div>
+
+<div class="progress-text">
+
+{{ dashboard.network.progress }}%
+of
+{{ "{:,}".format(dashboard.network.goal) }}
+Subscriber Goal
 
 <br><br>
 
-Views:
-<strong>{{ "{:,}".format(dashboard.network.views) }}</strong>
+{{ "{:,}".format(dashboard.network.views) }}
+Views
+•
+{{ dashboard.network.videos }}
+Videos
 
-<br><br>
+</div>
 
-Videos:
-<strong>{{ dashboard.network.videos }}</strong>
+</div>
 
-</p>
+</div>
 
 </div>
 
 <div class="footer">
 
-Foundation • v2.0.0
+Creator HQ RC2
+•
+Stay Consistent.
 
 </div>
 

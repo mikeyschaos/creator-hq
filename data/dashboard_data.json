@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-26T17:30:44.218696",
+  "generated": "2026-06-26T22:20:39.924587",
   "creatorTip": "Every upload teaches you something.",
   "channels": [
     {
@@ -7,9 +7,21 @@
       "subscribers": 35,
       "views": 2194,
       "videos": 10,
-      "goal": 100,
-      "remaining": 65,
-      "progress": 35.0
+      "goal": 250,
+      "remaining": 215,
+      "progress": 14.0,
+      "latestVideo": {
+        "title": "San Diego Night Metal Detecting 1/2/2021",
+        "publishedAt": "2021-02-13T22:51:09Z",
+        "videoId": "bQa6Xzt3tc0",
+        "thumbnail": "https://i.ytimg.com/vi/bQa6Xzt3tc0/hqdefault.jpg"
+      },
+      "uploadHealth": {
+        "daysSince": 1959,
+        "display": "5.4 years ago",
+        "color": "red",
+        "message": "Ready for Your Next Upload"
+      }
     },
     {
       "name": "Guns & Game",
@@ -18,7 +30,19 @@
       "videos": 7,
       "goal": 100,
       "remaining": 70,
-      "progress": 30.0
+      "progress": 30.0,
+      "latestVideo": {
+        "title": "Upgrade Your Pistol Game with Zib Grips! #zibgrips #pistolupgrade #gunenthusiast",
+        "publishedAt": "2025-04-30T19:30:58Z",
+        "videoId": "lTsq1-D5g7I",
+        "thumbnail": "https://i.ytimg.com/vi/lTsq1-D5g7I/hqdefault.jpg"
+      },
+      "uploadHealth": {
+        "daysSince": 422,
+        "display": "1.2 years ago",
+        "color": "red",
+        "message": "Ready for Your Next Upload"
+      }
     },
     {
       "name": "Mikey's Chaos",
@@ -27,7 +51,19 @@
       "videos": 40,
       "goal": 500,
       "remaining": 237,
-      "progress": 52.6
+      "progress": 52.6,
+      "latestVideo": {
+        "title": "Best tweezers for removing splinters \ud83d\ude0e #civiviknives #outdoors #edcgear",
+        "publishedAt": "2025-03-29T22:27:13Z",
+        "videoId": "P4dDei6DzwM",
+        "thumbnail": "https://i.ytimg.com/vi/P4dDei6DzwM/hqdefault.jpg"
+      },
+      "uploadHealth": {
+        "daysSince": 454,
+        "display": "1.2 years ago",
+        "color": "red",
+        "message": "Ready for Your Next Upload"
+      }
     }
   ],
   "network": {
@@ -41,5 +77,10 @@
     "theme": "dark",
     "showCreatorTip": true,
     "showClock": true
+  },
+  "coach": {
+    "icon": "\ud83c\udfaf",
+    "title": "Coach's Corner",
+    "message": "I'd Dig It hasn't had a new upload in 5.4 years.\n\nOne upload could completely change your momentum."
   }
 }

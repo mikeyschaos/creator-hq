@@ -1,0 +1,314 @@
+body{
+    background:#111;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    margin:30px 40px;
+}
+
+h1{
+    margin:0;
+}
+
+.subtitle{
+    color:#888;
+    margin-bottom:18px;
+}
+
+/* ==========================
+   Coach Card
+========================== */
+
+.coach-card{
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    background:#1b1b1b;
+
+    border-left:5px solid #4ea1ff;
+
+    border-radius:14px;
+
+    padding:18px 22px;
+
+    margin-bottom:24px;
+}
+
+.coach-title{
+    font-size:22px;
+    font-weight:bold;
+    min-width:220px;
+}
+
+.coach-message{
+    color:#ddd;
+    font-size:16px;
+    line-height:1.5;
+    white-space:pre-line;
+}
+
+/* ==========================
+   Channel Cards
+========================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+}
+
+.card{
+
+    background:#1b1b1b;
+
+    border-radius:15px;
+
+    padding:18px;
+
+}
+
+.card img{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+
+}
+
+.channel-title{
+
+    margin:4px 0 12px;
+
+}
+
+.big-number{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+.small-label{
+
+    color:#888;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+}
+
+.goal-line{
+
+    margin-top:4px;
+
+    color:#bbb;
+
+}
+
+.progress-bar{
+
+    width:100%;
+
+    height:10px;
+
+    background:#333;
+
+    border-radius:6px;
+
+    overflow:hidden;
+
+    margin:10px 0 6px;
+
+}
+
+.progress-fill{
+
+    background:#3da5ff;
+
+    height:100%;
+
+}
+
+.progress-text{
+
+    font-size:13px;
+
+    color:#bbb;
+
+}
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin:18px 0;
+
+}
+
+.stat-value{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+.stat-label{
+
+    color:#888;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+}
+
+.section{
+
+    border-top:1px solid #333;
+
+    padding-top:14px;
+
+    margin-top:14px;
+
+}
+
+.section-title{
+
+    color:#888;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    margin-bottom:6px;
+
+}
+
+.health{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.health.green{
+
+    color:#52d66f;
+
+}
+
+.health.yellow{
+
+    color:#ffd74a;
+
+}
+
+.health.red{
+
+    color:#ff6d6d;
+
+}
+
+.message{
+
+    color:#bbb;
+
+    font-size:14px;
+
+}
+
+.video-title{
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+.video-title a{
+
+    color:#ddd;
+
+    text-decoration:none;
+
+}
+
+.video-title a:hover{
+
+    color:#4ea1ff;
+
+}
+
+/* ==========================
+   Network
+========================== */
+
+.network{
+
+    margin-top:22px;
+
+    background:#1b1b1b;
+
+    border-radius:15px;
+
+    padding:18px;
+
+}
+
+.network-grid{
+
+    display:grid;
+
+    grid-template-columns:220px 1fr;
+
+    gap:25px;
+
+    align-items:center;
+
+}
+
+.network-number{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+.network-label{
+
+    color:#888;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+}
+
+.footer{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:12px;
+
+}

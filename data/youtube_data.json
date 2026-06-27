@@ -1,17 +1,35 @@
 {
   "I'd Dig It": {
-    "subscribers": "35",
-    "views": "2194",
-    "videos": "10"
+    "subscribers": 35,
+    "views": 2194,
+    "videos": 10,
+    "latestVideo": {
+      "title": "San Diego Night Metal Detecting 1/2/2021",
+      "publishedAt": "2021-02-13T22:51:09Z",
+      "videoId": "bQa6Xzt3tc0",
+      "thumbnail": "https://i.ytimg.com/vi/bQa6Xzt3tc0/hqdefault.jpg"
+    }
   },
   "Guns & Game": {
-    "subscribers": "30",
-    "views": "13075",
-    "videos": "7"
+    "subscribers": 30,
+    "views": 13075,
+    "videos": 7,
+    "latestVideo": {
+      "title": "Upgrade Your Pistol Game with Zib Grips! #zibgrips #pistolupgrade #gunenthusiast",
+      "publishedAt": "2025-04-30T19:30:58Z",
+      "videoId": "lTsq1-D5g7I",
+      "thumbnail": "https://i.ytimg.com/vi/lTsq1-D5g7I/hqdefault.jpg"
+    }
   },
   "Mikey's Chaos": {
-    "subscribers": "263",
-    "views": "136779",
-    "videos": "40"
+    "subscribers": 263,
+    "views": 136779,
+    "videos": 40,
+    "latestVideo": {
+      "title": "Best tweezers for removing splinters \ud83d\ude0e #civiviknives #outdoors #edcgear",
+      "publishedAt": "2025-03-29T22:27:13Z",
+      "videoId": "P4dDei6DzwM",
+      "thumbnail": "https://i.ytimg.com/vi/P4dDei6DzwM/hqdefault.jpg"
+    }
   }
 }

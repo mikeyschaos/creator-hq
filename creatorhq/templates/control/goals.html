@@ -1,0 +1,95 @@
+{% extends "control/layout.html" %}
+
+{% block title %}
+Goals
+{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">
+🎯 Subscriber Goals
+</h2>
+
+<p class="page-description">
+Configure the subscriber milestones used throughout Creator HQ.
+Changes will affect dashboard progress bars after saving.
+</p>
+
+{% if saved %}
+
+<div style="
+background:#1f4d2e;
+color:#d4ffd9;
+padding:14px;
+border-radius:8px;
+margin-bottom:25px;
+">
+
+✅ Goals saved successfully.
+
+</div>
+
+{% endif %}
+
+<form method="POST">
+
+<div class="goal-grid">
+
+{% for channel, goal in settings.goals.items() %}
+
+<div class="goal-card">
+
+<h3>{{ channel }}</h3>
+
+<div class="goal-label">
+Subscriber Goal
+</div>
+
+<input
+class="goal-input"
+type="number"
+name="{{ channel }}"
+value="{{ goal }}"
+min="1"
+required>
+
+</div>
+
+{% endfor %}
+
+<div class="goal-card">
+
+<h3>🌐 Creator Network</h3>
+
+<div class="goal-label">
+Network Goal
+</div>
+
+<input
+class="goal-input"
+type="number"
+name="networkGoal"
+value="{{ settings.networkGoal }}"
+min="1"
+required>
+
+</div>
+
+</div>
+
+<div class="save-row">
+
+<button
+class="save-button"
+type="submit"
+style="opacity:1;cursor:pointer;">
+
+💾 Save Changes
+
+</button>
+
+</div>
+
+</form>
+
+{% endblock %}

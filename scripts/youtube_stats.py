@@ -1,64 +1,112 @@
-import requests
 import json
-import tempfile
 import os
+import tempfile
 
-API_KEY = " AIzaSyAxnX-1yaJxqBOM5yo-bpKiyfGrf-A_akI"
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv("YOUTUBE_API_KEY")
+
+if not API_KEY:
+    raise RuntimeError("YOUTUBE_API_KEY not found in .env")
 
 CHANNELS = {
     "I'd Dig It": "UCSDKMK8RCGHyjNvIfnYssVw",
     "Guns & Game": "UCW6SQjQozoEiYe2RfiKDhtQ",
-    "Mikey's Chaos": "UC8V5_EWsCZzSOxOldl1D84w"
+    "Mikey's Chaos": "UC8V5_EWsCZzSOxOldl1D84w",
 }
 
 results = {}
 
-for name, channel_id in CHANNELS.items():
+for index, (name, channel_id) in enumerate(CHANNELS.items(), start=1):
 
-    print(f"Updating {name}")
-
-    url = (
-        "https://www.googleapis.com/youtube/v3/channels"
-        f"?part=statistics&id={channel_id}&key={API_KEY}"
-    )
+    print(f"[{index}/{len(CHANNELS)}] Updating {name}")
 
     try:
-        response = requests.get(url, timeout=15)
-        response.raise_for_status()
-        data = response.json()
+        # -----------------------------
+        # Channel Statistics
+        # -----------------------------
+        stats_response = requests.get(
+            "https://www.googleapis.com/youtube/v3/channels",
+            params={
+                "part": "statistics",
+                "id": channel_id,
+                "key": API_KEY,
+            },
+            timeout=15,
+        )
 
-        if not data.get("items"):
-            print(f"ERROR: No data returned for {name}")
-            continue
+        stats_response.raise_for_status()
 
-        stats = data["items"][0]["statistics"]
+        stats_json = stats_response.json()
+
+        if not stats_json.get("items"):
+            raise RuntimeError("No statistics returned")
+
+        statistics = stats_json["items"][0]["statistics"]
+
+        print("   ✓ Statistics")
+
+        # -----------------------------
+        # Latest Upload
+        # -----------------------------
+        search_response = requests.get(
+            "https://www.googleapis.com/youtube/v3/search",
+            params={
+                "part": "snippet",
+                "channelId": channel_id,
+                "order": "date",
+                "type": "video",
+                "maxResults": 1,
+                "key": API_KEY,
+            },
+            timeout=15,
+        )
+
+        search_response.raise_for_status()
+
+        search_json = search_response.json()
+
+        latest_video = {}
+
+        if search_json.get("items"):
+
+            item = search_json["items"][0]
+
+            latest_video = {
+                "title": item["snippet"]["title"],
+                "publishedAt": item["snippet"]["publishedAt"],
+                "videoId": item["id"]["videoId"],
+                "thumbnail": item["snippet"]["thumbnails"]["high"]["url"],
+            }
+
+            print("   ✓ Latest Upload")
 
         results[name] = {
-            "subscribers": stats.get("subscriberCount", "0"),
-            "views": stats.get("viewCount", "0"),
-            "videos": stats.get("videoCount", "0")
+            "subscribers": int(statistics.get("subscriberCount", 0)),
+            "views": int(statistics.get("viewCount", 0)),
+            "videos": int(statistics.get("videoCount", 0)),
+            "latestVideo": latest_video,
         }
 
-    except Exception as e:
-        print(f"ERROR updating {name}: {e}")
+    except Exception as exc:
+        print(f"   ✗ {exc}")
 
-# Safety check
 EXPECTED_CHANNELS = len(CHANNELS)
 
 if len(results) != EXPECTED_CHANNELS:
-    print(
-        f"\nERROR: Expected {EXPECTED_CHANNELS} channels but only received {len(results)}."
-    )
+    print("\nERROR: Not all channels updated successfully.")
     print("Keeping existing youtube_data.json unchanged.")
     raise SystemExit(1)
 
-# Atomic write
 os.makedirs("data", exist_ok=True)
 
 tmp = tempfile.NamedTemporaryFile(
     mode="w",
     delete=False,
-    dir="data"
+    dir="data",
 )
 
 json.dump(results, tmp, indent=2)
@@ -67,4 +115,4 @@ tmp.close()
 
 os.replace(tmp.name, "data/youtube_data.json")
 
-print("\nStats updated successfully")
+print("\n✓ YouTube data updated successfully.")

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Creator HQ - {% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="/static/css/control.css">
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>Creator HQ</h1>
+
+    <div class="subtitle">
+        Control Center
+    </div>
+
+</div>
+
+<div class="layout">
+
+    <div class="sidebar">
+
+        <h3>Navigation</h3>
+
+        <a class="nav-item" href="/">🏠 Dashboard</a>
+
+        <a class="nav-item active" href="/control">🏡 Overview</a>
+
+        <a class="nav-item" href="/control/goals">🎯 Goals</a>
+
+        <a class="nav-item" href="#">📺 Channels</a>
+
+        <a class="nav-item" href="#">💡 Creator Tips</a>
+
+        <a class="nav-item" href="#">⚙ Dashboard</a>
+
+        <a class="nav-item" href="#">🖥 System</a>
+
+        <a class="nav-item" href="#">ℹ About</a>
+
+    </div>
+
+    <div class="content">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+</div>
+
+<div class="footer">
+
+    Creator HQ • RC3 Development
+
+</div>
+
+</body>
+
+</html>

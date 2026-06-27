@@ -21,8 +21,11 @@ def create_app():
 
     logging.info("Creator HQ started.")
 
+    # Register Blueprints
     from .blueprints.dashboard import dashboard
+    from .blueprints.control import control
 
     app.register_blueprint(dashboard)
+    app.register_blueprint(control)
 
     return app
