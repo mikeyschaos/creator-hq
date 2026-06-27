@@ -1,41 +1,45 @@
 {
-  "generated": "2026-06-25T21:50:17.845295",
-  "creatorTip": "Done is better than perfect.",
+  "generated": "2026-06-26T17:30:44.218696",
+  "creatorTip": "Every upload teaches you something.",
   "channels": [
     {
       "name": "I'd Dig It",
-      "image": "iddigitlogo.png",
       "subscribers": 35,
       "views": 2194,
       "videos": 10,
-      "goal": 1000,
-      "remaining": 965,
-      "progress": 3.5
+      "goal": 100,
+      "remaining": 65,
+      "progress": 35.0
     },
     {
       "name": "Guns & Game",
-      "image": "gunsandgame.jpg",
       "subscribers": 30,
       "views": 13075,
       "videos": 7,
-      "goal": 1000,
-      "remaining": 970,
-      "progress": 3.0
+      "goal": 100,
+      "remaining": 70,
+      "progress": 30.0
     },
     {
       "name": "Mikey's Chaos",
-      "image": "mikeyschaos.jpg",
       "subscribers": 263,
       "views": 136779,
       "videos": 40,
-      "goal": 1000,
-      "remaining": 737,
-      "progress": 26.3
+      "goal": 500,
+      "remaining": 237,
+      "progress": 52.6
     }
   ],
   "network": {
     "subscribers": 328,
     "views": 152048,
-    "videos": 57
+    "videos": 57,
+    "goal": 1000,
+    "progress": 32.8
+  },
+  "settings": {
+    "theme": "dark",
+    "showCreatorTip": true,
+    "showClock": true
   }
 }

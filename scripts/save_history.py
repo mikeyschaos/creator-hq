@@ -3,7 +3,7 @@ import os
 import shutil
 from datetime import datetime
 
-STATS_FILE = "/home/bigloot/dashboard/data/stats.json"
+STATS_FILE = "/home/bigloot/creator-hq/data/youtube_data.json"
 HISTORY_DIR = "/home/bigloot/dashboard/history"
 
 os.makedirs(HISTORY_DIR, exist_ok=True)

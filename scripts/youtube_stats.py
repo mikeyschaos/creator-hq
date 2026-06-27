@@ -49,7 +49,7 @@ if len(results) != EXPECTED_CHANNELS:
     print(
         f"\nERROR: Expected {EXPECTED_CHANNELS} channels but only received {len(results)}."
     )
-    print("Keeping existing stats.json unchanged.")
+    print("Keeping existing youtube_data.json unchanged.")
     raise SystemExit(1)
 
 # Atomic write
@@ -65,6 +65,6 @@ json.dump(results, tmp, indent=2)
 
 tmp.close()
 
-os.replace(tmp.name, "data/stats.json")
+os.replace(tmp.name, "data/youtube_data.json")
 
 print("\nStats updated successfully")

@@ -1,0 +1,15 @@
+{
+  "goals": {
+    "I'd Dig It": 100,
+    "Guns & Game": 100,
+    "Mikey's Chaos": 500
+  },
+
+  "networkGoal": 1000,
+
+  "dashboard": {
+    "theme": "dark",
+    "showCreatorTip": true,
+    "showClock": true
+  }
+}
